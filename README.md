@@ -39,11 +39,11 @@ _____________________________________________________
 
 ________________________
 zobaczyc sobie modele wykladnicze,
-zmienic zbior danych na odstep do dzien (closing price),
-sprawdzic outliery,
-sprawdzic seasonality/trendy w danych,
-podzielic dataset na podzbiory,
+zmienic zbior danych na odstep do dzien (closing price) - Wiola,
+sprawdzic outliery - Maria,
+sprawdzic seasonality/trendy w danych - Maria,
+podzielic dataset na podzbiory - Kornelia,
 -- po zrobieniu modelu/modeli:
-residual analysis with conclusions,
+residual analysis with conclusions - ,
 statistical tests,
 forecasting based on the model and verfication of the forecast
