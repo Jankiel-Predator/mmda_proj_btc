@@ -4,7 +4,7 @@ We forgot that **Price**, **Open**, **High**, **Low** have commas indicating tho
 
 ## Remember to read it this way:
 ```
-pd.read_csv('data.csv', parse_dates=['Date'])
+pd.read_csv('data/bitcoin/bitcoin_preprocessed.csv', index_col="Date", parse_dates=["Date"])
 ```
 
 Otherwise the **Date** column may not work correctly. Also, you can set index to **Date** but I do not know whether this is necessary.
