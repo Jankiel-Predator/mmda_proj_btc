@@ -1,3 +1,16 @@
+# bitcoin_preprocessed.csv is already preprocessed and you can read it directly
+
+We forgot that **Price**, **Open**, **High**, **Low** have commas indicating thousands, it could not be converted to floats and generated NaN when trying to modify it but I noticed it only after trying to make a chart of the Price movement over time.
+
+## Remember to read it this way:
+```
+pd.read_csv('data.csv', parse_dates=['Date'])
+```
+
+Otherwise the **Date** column may not work correctly. Also, you can set index to **Date** but I do not know whether this is necessary.
+
+---
+
 WORK SMART NOT HARD!!
 _____________________________________________________
 
