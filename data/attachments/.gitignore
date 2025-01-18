@@ -1,0 +1,5 @@
+# Ignore specific CSV files
+bitcoin_original.csv
+bitcoin_preprocessed.csv
+goldstock v1.csv
+goldstock v2.csv
