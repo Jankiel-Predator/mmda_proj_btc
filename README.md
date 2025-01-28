@@ -31,18 +31,28 @@ No other anomalies or missing values were recognized.
 ...
 
 #### Differencing, Logging & Logging Followed by Differencing
-...
+We tested the dataset for stationarity using the Augmented Dickey-Fuller test, which revealed that the series is not stationary. To address this, we did the following transformations:
+- differencing - to stablilise the mean by removing trends - new column "Close_Diff" was created, where each value represents the difference between the current and previous price
+- log transformation - to stabilise the variance - new column "Close_Log" was created
+- log differencing - to address both non-stationary mean and variance - "Close_Log_Diff" was created where we applied log transformation first, followed by differencing
 
-#### Frequency by Time Period
-...
+To further explore the underlying patterns in the data, **seasonal decomposition** was performed using an additive model for four key columns:
+- `Price`
+- `Close_Diff`
+- `Close_Log`
+- `Close_Log_Diff`
 
-#### Decompositions
-...
+The decompositions were applied over two specific Bitcoin halving cycles:
+- **2016–2020 Halving Period**
+- **2020–2024 Halving Period**
 
-#### Auxilary Plots
-...
+### Insights from Decomposition
+- **Trend**: A clear upward trajectory in Bitcoin prices over both periods.
+- **Seasonality**: Seasonal patterns were weak but slightly more pronounced during the 2020–2024 period.
+- **Residuals**: Volatility is a dominant feature of Bitcoin prices, with significant residual components even after transformations.
 
-**Dodaj tu obrazki i krótkie opisy, które twoim zdaniem mają sens, bo jest ich tam tyle, że nie wiem za bardzo co się dzieje**
+### Partial Autocorrelation Analysis (PACF)
+The **PACF plot** for the series showed a sharp drop after lag 1, suggesting that the series can be well-represented by an **AR(1)** model. This indicates that the current value of Bitcoin prices is primarily influenced by its immediate previous value, with negligible impact from higher lags.
 
 ### Modeling
 
