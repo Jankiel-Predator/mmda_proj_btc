@@ -8,7 +8,7 @@
 ## Team:
 - Kornelia Dołęga-Żaczek: *classic ML methods experimentations, LSTM & GRU fine-tuning, Prophet, ...*
 - Jacek Kała: *preprocessing, initial MA & EMA, baseline LSTM & GRU*
-- Maria Leszczyńska: *decompostion, seasonality checks, stationarity analysis, visualization, smoothing, Prophet, Holt-Winters model (and RF which was a bad experiment)*
+- Maria Leszczyńska: *decompostion, seasonality checks, stationarity check, visualization, smoothing, Prophet, Holt-Winters model (and RF which was a bad experiment)*
 - Wioletta Wielakowska: *GARCH & ARIMA model: preparation, fine-tuning, description*
 
 ---
@@ -26,11 +26,11 @@ No other anomalies or missing values were recognized.
 
 ### Data Exploration
 ![Alt text](image/halving.png)
+A quick look at frequency in our data:
 
-#### Stationarity check - Augmented Dickey–Fuller Test & Seasonality Checks
-...
+![Frequency](image/frequency.png)
 
-#### Differencing, Logging & Logging Followed by Differencing
+#### Stationarity check, Differencing, Logging & Logging Followed by Differencing
 We tested the dataset for stationarity using the Augmented Dickey-Fuller test, which revealed that the series is not stationary. To address this, we did the following transformations:
 - differencing - to stablilise the mean by removing trends - new column "Close_Diff" was created, where each value represents the difference between the current and previous price
 - log transformation - to stabilise the variance - new column "Close_Log" was created
@@ -42,10 +42,15 @@ To further explore the underlying patterns in the data, **seasonal decomposition
 - `Close_Log`
 - `Close_Log_Diff`
 
-The decompositions were applied over two specific Bitcoin halving cycles:
+  ![Closing price](image/price_decomp.png)
+  ![Close_Log_Diff](image/close_log_diff.png)
+
+The decompositions were also applied over two specific Bitcoin halving cycles:
 - **2016–2020 Halving Period**
 - **2020–2024 Halving Period**
-
+  ![Halving 2016-2020](image/halving_1.png)
+  ![Halving 2020-2024](image/halving_2.png)
+  
 ### Insights from Decomposition
 - **Trend**: A clear upward trajectory in Bitcoin prices over both periods.
 - **Seasonality**: Seasonal patterns were weak but slightly more pronounced during the 2020–2024 period.
@@ -53,11 +58,15 @@ The decompositions were applied over two specific Bitcoin halving cycles:
 
 ### Partial Autocorrelation Analysis (PACF)
 The **PACF plot** for the series showed a sharp drop after lag 1, suggesting that the series can be well-represented by an **AR(1)** model. This indicates that the current value of Bitcoin prices is primarily influenced by its immediate previous value, with negligible impact from higher lags.
+  ![PACF](image/pacf.png)
 
+  
 ### Modeling
 
 #### Moving Average
 
+  ![7-day Simple Moving Average](image/7_sma.png)
+  ![30-day Simple Moving Average](image/30_sma.png)
 #### Exponential Moving Average
 The EMA is more responsive to recent changes in the data compared to a simple moving average (SMA), which gives equal weight to all data points in the window. The **time window** was set to **50**, the only thing was to properly adjust the **smoothing factor** by minimizng the mean squared error. Eventually, the value **0.1** was selected, yielding the MSE of **0.00002**.
 
@@ -125,14 +134,4 @@ Best model visualization:
 ![Alt text](image/final_gru.png)
 
 #### Prophet
-
-________________________
-zobaczyc sobie modele wykladnicze,
-zmienic zbior danych na odstep do dzien (closing price) - Wiola,
-sprawdzic outliery - Maria,
-sprawdzic seasonality/trendy w danych - Maria,
-podzielic dataset na podzbiory - Kornelia,
--- po zrobieniu modelu/modeli:
-residual analysis with conclusions - ,
-statistical tests,
-forecasting based on the model and verfication of the forecast
+![Prophet](image/output.png)
