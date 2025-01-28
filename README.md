@@ -65,11 +65,40 @@ The EMA is more responsive to recent changes in the data compared to a simple mo
 
 #### Classic ML Models
 
-#### GARCH
+#### ARIMA 
+ARIMA was applied as a baseline model to explore its capability. Unfortunately, the model struggled with Bitcoin price prediction, likely due to the high volatility and non-stationarity of the data. Its performance highlighted the need for more advanced or non-linear models, like Prophet or GARCH, for handling Bitcoin's complex behavior.
 
+![Alt text](image/arima.png)
+
+We performed rolling mean and standard deviation analysis for the Close_Log_Diff series using different periods: 91 days, 30 days, and 7 days. The results showed that a rolling window of 7 days provided the best fit for capturing short-term trends and fluctuations in the data. Longer periods, such as 91 and 30 days, smoothed the data excessively, making it less effective for analyzing short-term variability.
+
+![Alt text](image/arima_deviation.png)
+
+
+We used a rolling forecast with the ARIMA(5,1,0) model, which closely matched the actual Bitcoin price data. This method updates the model with each new observation and forecasts the next, making it well-suited for capturing short-term trends in volatile data like Bitcoin.
+The rolling forecast adapts dynamically to new data, providing accurate short-term predictions despite Bitcoin's high volatility.
+
+![Alt text](image/arima_rolling.png)
+
+#### GARCH
+This model is commonly used for forecasting and modeling financial time series data, particularly in cases where volatility is important. Unlike models that focus purely on predicting prices, GARCH models aim to model the time-varying volatility that often occurs in financial markets. This is particularly useful for modeling asset returns, such as Bitcoin prices, which can experience significant fluctuations in volatility over time.
+
+We used GARCH(1,3), the decision was made based on the code which counted the best model for our data.
 ![Alt text](image/garch(1,1).png)
 
-![Alt text](image/rolling_forecast.png)
+![Alt text](image/garch_residuals.png)
+
+Moreover, we used GARCH(1,1) for predicting volatility using only the last year from the data as well as the last month from the data. All of the plots has shown straigh or almost straigh line. That is why wwe decided to do the rolling forecasts for GARCH.
+
+![Alt text](image/garch_rolling.png)
+
+
+![Alt text](image/garch_rolling_year.png)
+
+
+![Alt text](image/garch_rolling_month.png)
+
+The rolling forecasts of volatility using the GARCH model provided a more dynamic view of how Bitcoin's volatility changes over time. It workd fine for the 'all data' and for the 'last year'. Unfortunately it does not cover with the data of the 'last month'.
 
 #### LSTM & GRU
 Long-short-term memory models are extremely powerful time-series models. Due to their architecture, they can predict an arbitrary number of steps into the future. The major factor that distinguishes them from other neural networks is their recurrent setting, which on the high level, may be perceived as training several neural networks which, working sequentially (in loops), communicate with each other on the way. The family of RNN is formed by Long Short Term Memory (LSTM) & Gated Recurrent Unit (GRU) models.
