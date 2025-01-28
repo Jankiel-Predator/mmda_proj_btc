@@ -6,7 +6,7 @@
 [Our dataset](https://www.investing.com/crypto/bitcoin/historical-data) contains six columns: **Date**, **Price**, **Open**, **High**, **Low** and **Vol.** Its records encompass daily changes in the aforementioned metrics, starting from 2010-07-18, up to 2024-12-31.
 
 ## Team:
-- Kornelia Dołęga-Żaczek: *classic ML methods experimentations, LSTM & GRU fine-tuning, ...*
+- Kornelia Dołęga-Żaczek: *classic ML methods experimentations, LSTM & GRU fine-tuning, Prophet, ...*
 - Jacek Kała: *preprocessing, initial MA & EMA, baseline LSTM & GRU*
 - Maria Leszczyńska: *decompostion, seasonality checks, stationarity analysis, visualization, smoothing, Prophet, Holt-Winters model (and RF which was a bad experiment)*
 - Wioletta Wielakowska: *GARCH & ARIMA model: preparation, fine-tuning, description*
