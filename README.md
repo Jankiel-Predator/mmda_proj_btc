@@ -25,7 +25,7 @@ Several data inconsistencies where identified, restricting proper analysis. Afte
 No other anomalies or missing values were recognized.
 
 ### Data Exploration
-halving Marii photo
+![Alt text](image/halving.png)
 
 #### Stationarity check - Augmented Dickey–Fuller Test & Seasonality Checks
 ...
@@ -57,7 +57,11 @@ The EMA is more responsive to recent changes in the data compared to a simple mo
 
 #### GARCH
 
-### LSTM & GRU
+![Alt text](image/garch(1,1).png)
+
+![Alt text](image/rolling_forecast.png)
+
+#### LSTM & GRU
 Long-short-term memory models are extremely powerful time-series models. Due to their architecture, they can predict an arbitrary number of steps into the future. The major factor that distinguishes them from other neural networks is their recurrent setting, which on the high level, may be perceived as training several neural networks which, working sequentially (in loops), communicate with each other on the way. The family of RNN is formed by Long Short Term Memory (LSTM) & Gated Recurrent Unit (GRU) models.
 
 We use both of them to predict feature **Price**/**Close** of Bitcoin, applying different layers, neuron units, time period predicted, training data volume, usage of several features and so on. We visualized the results plotting the actual vs predicted lines on top of each other. In general, to select the most efficient and well-adjusted model we used several metrics: **RMSE**, **MAE**, **R2**, **MSLE**, **MAPE** with special focus on **RMSE** as the simple yet insightful residual analysis method.
@@ -77,46 +81,11 @@ The models we examined were:
 | **Model 9 (GRU, 50 Epochs, StandardScaler, early stopping, dropouts, Close, batchsize=32, n_steps=120, RMSprop)** | 2611.39 | 1865.43 | 0.9842 | 0.003290 | 63.39% |
 | **Final Model (GRU, 125 Units, 100 Epochs, MinMaxScaler, NO early stopping, NO dropouts, Close, batchsize=64, n_steps=60, RMSprop) 3 MONTHS PREDICTIONS** | 1903.58 | 1366.47 | 0.9827 | 0.000796 | 23.06% |
 
-[zdj]
+Best model visualization:
 
-### Prophet
+![Alt text](image/final_gru.png)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Requirements for the project:
-1. Time Series Recognition:
-   - Ability to identify time series data.
-   - Determination of basic dependencies in time series.
-   - Decomposition of time series into components: trend, seasonality, residual series.
-
-2. Examining Time Series Properties:
-   - Analysis of stationarity using appropriate statistical tests.
-   - Performing transformations on time series.
-   - Creating auxiliary plots.
-
-3. Preparation for Modeling:
-   - Splitting data into training and test sets.
-   - Selecting an appropriate model for time series analysis.
-   - Conducting the model training process.
-   - Making predictions using the model.
-   - Evaluating the effectiveness of the obtained model.
+#### Prophet
 
 ________________________
 zobaczyc sobie modele wykladnicze,
