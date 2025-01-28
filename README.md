@@ -135,3 +135,12 @@ Best model visualization:
 
 #### Prophet
 ![Prophet](image/output.png)
+
+
+#### Sources
+https://www.geeksforgeeks.org/bitcoin-price-prediction-using-machine-learning-in-python/
+https://towardsdatascience.com/demystifying-cryptocurrency-price-prediction-5fb2b504a110
+https://facebook.github.io/prophet/docs/quick_start.html#python-api
+https://datascientest.com/en/facebook-prophet-all-you-need-to-know
+https://stats.stackexchange.com/questions/423238/arima-rolling-window
+https://medium.com/@yennhi95zz/a-guide-to-time-series-models-in-machine-learning-usage-pros-and-cons-ac590a75e8b3
