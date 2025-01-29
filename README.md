@@ -74,9 +74,9 @@ The **PACF plot** for the series showed a sharp drop after lag 1, suggesting tha
   ![30-day Simple Moving Average](image/30_sma.png)
   
 #### Exponential Moving Average
-The EMA is more responsive to recent changes in the data compared to a simple moving average (SMA), which gives equal weight to all data points in the window. The **time window** was set to **50**, the only thing was to properly adjust the **smoothing factor** by minimizng the mean squared error. Eventually, the value **0.1** was selected, yielding the MSE of **0.00002**.
+The **EMA** is more responsive to recent changes in the data compared to a simple moving average (SMA), which gives equal weight to all data points in the window. Here, the only thing to do, was to properly adjust the **smoothing factor (α)** by minimizng the mean squared error and saving reasonable insight into past values by this function. Eventually, the value **0.8** was selected, yielding the MAE of **66.8141 ($)**, which seems to be sensible choice - compromise between volatility and past values significance.
 
-(give the picture!)[link to picture]
+ ![](image/ema.png)
 
 #### Classic ML Models
 
