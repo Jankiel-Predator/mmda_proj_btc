@@ -33,7 +33,7 @@ A quick look at frequency in our data:
 #### Stationarity check, Differencing, Logging & Logging Followed by Differencing
 We tested the dataset for stationarity using the Augmented Dickey-Fuller test, which revealed that the series is not stationary. To address this, we did the following transformations:
 - *differencing* - to stablilise the mean by removing trends - new column `Close_Diff` was created, where each value represents the difference between the current and previous price
-- *log transformation* - to stabilise the variance - new column "Close_Log" was created
+- *log transformation* - to stabilise the variance - new column `Close_Log` was created
 - *log differencing* - to address both non-stationary mean and variance - `Close_Log_Diff` was created where we applied log transformation first, followed by differencing
 
 To further explore the underlying patterns in the data, **seasonal decomposition** was performed using an additive model for four key columns:
