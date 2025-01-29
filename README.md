@@ -2,7 +2,7 @@
 
 *This project aims to analyze Bitcoin Prices Data (2010-2024) to uncover trends and predict feature prices utilizing Time Series Analysis techniques.*
 
-## The dataset
+## Data
 [Our dataset](https://www.investing.com/crypto/bitcoin/historical-data) contains six columns: `Date`, `Price`, `Open`, `High`, `Low` and `Vol.` Its records encompass daily changes in the aforementioned metrics, starting from 2010-07-18, up to 2024-12-31.
 
 ## Team:
