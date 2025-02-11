@@ -5,7 +5,7 @@
 ## Data
 [Our dataset](https://www.investing.com/crypto/bitcoin/historical-data) contains six columns: `Date`, `Price`, `Open`, `High`, `Low` and `Vol.` Its records encompass daily changes in the aforementioned metrics, starting from 2010-07-18, up to 2024-12-31.
 
-## Team:
+## Team
 - Kornelia Dołęga-Żaczek: *classic ML methods experimentations, LSTM & GRU fine-tuning, Prophet*
 - Jacek Kała: *preprocessing, initial MA & EMA, baseline LSTM & GRU*
 - Maria Leszczyńska: *decompostion, seasonality checks, stationarity check, visualization, smoothing, Prophet, Holt-Winters model (and RF which was a bad experiment)*
@@ -135,6 +135,7 @@ The models we examined were:
 | **Model 8 (GRU, 50 Epochs, MinMaxScaler, early stopping, NO dropouts, Close, batchsize=32, n_steps=60, RMSprop)** | 2689.83 | 1915.69 | 0.9833 | 0.002702 | 60.97% |
 | **Model 9 (GRU, 50 Epochs, StandardScaler, early stopping, dropouts, Close, batchsize=32, n_steps=120, RMSprop)** | 2611.39 | 1865.43 | 0.9842 | 0.003290 | 63.39% |
 | **Final Model (GRU, 125 Units, 100 Epochs, MinMaxScaler, NO early stopping, NO dropouts, Close, batchsize=64, n_steps=60, RMSprop) YEARLY PREDICTIONS (2024-01-10 - 2024-12-31)** | **1903.58** | **1366.47** | **0.9827** | **0.000796** | **23.06%** |
+
 *most of these scores are saved in the file **sth** on the branch **sth**
 
 After retraining **LSTM** and **GRU** for **1000+ days predictions**, the results improved as compared to yearly predictions performed and documented above:
