@@ -7,7 +7,7 @@
 
 ## Team
 - Kornelia Dołęga-Żaczek: *classic ML methods experimentations, LSTM & GRU fine-tuning, Prophet*
-- Jacek Kała: *preprocessing, initial MA & EMA, baseline LSTM & GRU*
+- Jacek Kała: *preprocessing, initial MA & EMA, RNNs: LSTM & GRU*
 - Maria Leszczyńska: *decompostion, seasonality checks, stationarity check, visualization, smoothing, Prophet, Holt-Winters model (and RF which was a bad experiment)*
 - Wioletta Wielakowska: *GARCH & ARIMA model: preparation, fine-tuning, description*
 
