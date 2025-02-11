@@ -136,7 +136,7 @@ The models we examined were:
 | **Model 9 (GRU, 50 Epochs, StandardScaler, early stopping, dropouts, Close, batchsize=32, n_steps=120, RMSprop)** | 2611.39 | 1865.43 | 0.9842 | 0.003290 | 63.39% |
 | **Final Model (GRU, 125 Units, 100 Epochs, MinMaxScaler, NO early stopping, NO dropouts, Close, batchsize=64, n_steps=60, RMSprop) YEARLY PREDICTIONS (2024-01-10 - 2024-12-31)** | **1903.58** | **1366.47** | **0.9827** | **0.000796** | **23.06%** |
 
-*most of these scores are saved in the file **sth** on the branch **sth**
+*most of these scores are saved in the file *lstm_adjustments.ipynb* on the branch *rnn_experiments*
 
 After retraining **LSTM** and **GRU** for **1000+ days predictions**, the results improved as compared to yearly predictions performed and documented above:
 **1000+ days forecast:**
