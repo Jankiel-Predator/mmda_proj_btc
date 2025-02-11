@@ -6,7 +6,7 @@
 [Our dataset](https://www.investing.com/crypto/bitcoin/historical-data) contains six columns: **Date**, **Price**, **Open**, **High**, **Low** and **Vol.** Its records encompass daily changes in the aforementioned metrics, starting from 2010-07-18, up to 2024-12-31.
 
 ## Team:
-- Kornelia Dołęga-Żaczek: *classic ML methods experimentations, LSTM & GRU fine-tuning, Prophet, ...*
+- Kornelia Dołęga-Żaczek: *classic ML methods experimentations, LSTM & GRU fine-tuning, Prophet*
 - Jacek Kała: *preprocessing, initial MA & EMA, baseline LSTM & GRU*
 - Maria Leszczyńska: *decompostion, seasonality checks, stationarity check, visualization, smoothing, Prophet, Holt-Winters model (and RF which was a bad experiment)*
 - Wioletta Wielakowska: *GARCH & ARIMA model: preparation, fine-tuning, description*
@@ -134,7 +134,13 @@ Best model visualization:
 ![Alt text](image/final_gru.png)
 
 #### Prophet
+
+The image is a time series forecast generated using Facebook **Prophet**, a forecasting model designed for handling trends, seasonality, and uncertainty in time series data. The data shows an overall upward trend with periodic spikes and declines, suggesting **seasonality** and external influencing factors. Noticeable peaks occur around 2018, 2021, and 2024, followed by declines, indicating **cycles of rapid growth** and corrections. The model predicts continued strong growth in 2024 and 2025, with an increasing trajectory. The **confidence interval widens** as the forecast extends further into **the future**, reflecting greater uncertainty.
+
+The Prophet model appears to capture the general trend effectively, though some high-volatility points deviate from the predicted range. The forecast suggests a continuation of previous cycles, projecting an **upward movement** while accounting for fluctuations.
+
 ![Prophet](image/output.png)
+
 
 
 #### Sources
