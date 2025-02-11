@@ -150,7 +150,7 @@ In this case, LSTM performs slightly better in all key metrics, though the diffe
 
 Best (longterm forecast) model visualization:
 
-![Alt text](images/final_gru.png)
+![Alt text](images/lstm.png)
 
 #### Prophet
 
