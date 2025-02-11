@@ -2,8 +2,8 @@
 
 *This project aims to analyze Bitcoin Prices Data (2010-2024) to uncover trends and predict feature prices utilizing Time Series Analysis techniques.*
 
-## The dataset
-[Our dataset](https://www.investing.com/crypto/bitcoin/historical-data) contains six columns: **Date**, **Price**, **Open**, **High**, **Low** and **Vol.** Its records encompass daily changes in the aforementioned metrics, starting from 2010-07-18, up to 2024-12-31.
+## Data
+[Our dataset](https://www.investing.com/crypto/bitcoin/historical-data) contains six columns: `Date`, `Price`, `Open`, `High`, `Low` and `Vol.` Its records encompass daily changes in the aforementioned metrics, starting from 2010-07-18, up to 2024-12-31.
 
 ## Team:
 - Kornelia Dołęga-Żaczek: *classic ML methods experimentations, LSTM & GRU fine-tuning, Prophet*
@@ -15,11 +15,11 @@
 
 ### Data Preprocessing
 Several data inconsistencies where identified, restricting proper analysis. After disposing of the duplicated index column, the following steps were applied:
-- replacing "," with empty strings, as the original data used it as the hundreds separator (columns:  **Price**, **Open**, **High**, **Low**). After that, their datatypes were replaced with floating points
-- reshaping the **Date**, modifying the structure from *mm-dd-YYYY* to *YYYY-mm-dd* as the universally recognized standard, ensuring the datetime format, then sorting and setting it as the index column
-- constructing new column: **Average** as the average of **High** and **Low**, which was supposed to be a more reliable metric. Ultimately, for prediction we use **Price**
-- renaming columns: **Price** to **Close**, **Vol.** to **Volume**
-- reconstructing **Volume** to handle *K*, *M* and *B* quantifiers, and expand them with thousand, million, billion, receiving valid numbers. This column was used in initial experimentations with time-series based neural networks
+- replacing "," with empty strings, as the original data used it as the hundreds separator (columns:  `Price`, `Open`, `High`, `Low`). After that, their datatypes were replaced with floating points
+- reshaping the `Date`, modifying the structure from *mm-dd-YYYY* to *YYYY-mm-dd* as the universally recognized standard, ensuring the datetime format, then sorting and setting it as the index column
+- constructing new column: `Average` as the average of `High` and `Low`, which was supposed to be a more reliable metric. Ultimately, for prediction we use `Price`
+- renaming columns: `Price` to `Close`, `Vol.` to `Volume`
+- reconstructing `Volume` to handle *K*, *M* and *B* quantifiers, and expand them with thousand, million, billion, receiving valid numbers. This column was used in initial experimentations with time-series based neural networks
 - *MinMaxScaling* was used separately before every model training, the rectified dataset was saved as **bitcoin_preprocessed**
 
 No other anomalies or missing values were recognized.
@@ -32,9 +32,9 @@ A quick look at frequency in our data:
 
 #### Stationarity check, Differencing, Logging & Logging Followed by Differencing
 We tested the dataset for stationarity using the Augmented Dickey-Fuller test, which revealed that the series is not stationary. To address this, we did the following transformations:
-- differencing - to stablilise the mean by removing trends - new column "Close_Diff" was created, where each value represents the difference between the current and previous price
-- log transformation - to stabilise the variance - new column "Close_Log" was created
-- log differencing - to address both non-stationary mean and variance - "Close_Log_Diff" was created where we applied log transformation first, followed by differencing
+- *differencing* - to stablilise the mean by removing trends - new column `Close_Diff` was created, where each value represents the difference between the current and previous price
+- *log transformation* - to stabilise the variance - new column `Close_Log` was created
+- *log differencing* - to address both non-stationary mean and variance - `Close_Log_Diff` was created where we applied log transformation first, followed by differencing
 
 To further explore the underlying patterns in the data, **seasonal decomposition** was performed using an additive model for four key columns:
 - `Price`
@@ -46,18 +46,23 @@ To further explore the underlying patterns in the data, **seasonal decomposition
   ![Close_Log_Diff](image/close_log_diff.png)
 
 The decompositions were also applied over two specific Bitcoin halving cycles:
+
 - **2016–2020 Halving Period**
-- **2020–2024 Halving Period**
+  
   ![Halving 2016-2020](image/halving_1.png)
+  
+- **2020–2024 Halving Period**
+  
   ![Halving 2020-2024](image/halving_2.png)
   
-### Insights from Decomposition
+##### Insights from Decomposition
 - **Trend**: A clear upward trajectory in Bitcoin prices over both periods.
 - **Seasonality**: Seasonal patterns were weak but slightly more pronounced during the 2020–2024 period.
 - **Residuals**: Volatility is a dominant feature of Bitcoin prices, with significant residual components even after transformations.
 
-### Partial Autocorrelation Analysis (PACF)
+#### Partial Autocorrelation Analysis (PACF)
 The **PACF plot** for the series showed a sharp drop after lag 1, suggesting that the series can be well-represented by an **AR(1)** model. This indicates that the current value of Bitcoin prices is primarily influenced by its immediate previous value, with negligible impact from higher lags.
+
   ![PACF](image/pacf.png)
 
   
@@ -67,10 +72,11 @@ The **PACF plot** for the series showed a sharp drop after lag 1, suggesting tha
 
   ![7-day Simple Moving Average](image/7_sma.png)
   ![30-day Simple Moving Average](image/30_sma.png)
+  
 #### Exponential Moving Average
-The EMA is more responsive to recent changes in the data compared to a simple moving average (SMA), which gives equal weight to all data points in the window. The **time window** was set to **50**, the only thing was to properly adjust the **smoothing factor** by minimizng the mean squared error. Eventually, the value **0.1** was selected, yielding the MSE of **0.00002**.
+The **EMA** is more responsive to recent changes in the data compared to a simple moving average (SMA), which gives equal weight to all data points in the window. Here, the only thing to do, was to properly adjust the **smoothing factor (α)** by minimizng the mean squared error and saving reasonable insight into past values by this function. Eventually, the value **0.8** was selected, yielding the MAE of **66.8141 ($)**, which seems to be sensible choice - compromise between volatility and past values significance.
 
-(give the picture!)[link to picture]
+ ![](image/ema.png)
 
 #### Classic ML Models
 
@@ -79,12 +85,12 @@ ARIMA was applied as a baseline model to explore its capability. Unfortunately, 
 
 ![Alt text](image/arima.png)
 
-We performed rolling mean and standard deviation analysis for the Close_Log_Diff series using different periods: 91 days, 30 days, and 7 days. The results showed that a rolling window of 7 days provided the best fit for capturing short-term trends and fluctuations in the data. Longer periods, such as 91 and 30 days, smoothed the data excessively, making it less effective for analyzing short-term variability.
+We performed rolling mean and standard deviation analysis for the `Close_Log_Diff` series using different periods: 91 days, 30 days, and 7 days. The results showed that a rolling window of 7 days provided the best fit for capturing short-term trends and fluctuations in the data. Longer periods, such as 91 and 30 days, smoothed the data excessively, making it less effective for analyzing short-term variability.
 
 ![Alt text](image/arima_deviation.png)
 
 
-We used a rolling forecast with the ARIMA(5,1,0) model, which closely matched the actual Bitcoin price data. This method updates the model with each new observation and forecasts the next, making it well-suited for capturing short-term trends in volatile data like Bitcoin.
+We used a rolling forecast with the **ARIMA(5,1,0)** model, which closely matched the actual Bitcoin price data. This method updates the model with each new observation and forecasts the next, making it well-suited for capturing short-term trends in volatile data like Bitcoin.
 The rolling forecast adapts dynamically to new data, providing accurate short-term predictions despite Bitcoin's high volatility.
 
 ![Alt text](image/arima_rolling.png)
@@ -92,12 +98,13 @@ The rolling forecast adapts dynamically to new data, providing accurate short-te
 #### GARCH
 This model is commonly used for forecasting and modeling financial time series data, particularly in cases where volatility is important. Unlike models that focus purely on predicting prices, GARCH models aim to model the time-varying volatility that often occurs in financial markets. This is particularly useful for modeling asset returns, such as Bitcoin prices, which can experience significant fluctuations in volatility over time.
 
-We used GARCH(1,3), the decision was made based on the code which counted the best model for our data.
+We used **GARCH(1,3)**, the decision was made based on the code which counted the best model for our data.
+
 ![Alt text](image/garch(1,1).png)
 
 ![Alt text](image/garch_residuals.png)
 
-Moreover, we used GARCH(1,1) for predicting volatility using only the last year from the data as well as the last month from the data. All of the plots has shown straigh or almost straigh line. That is why wwe decided to do the rolling forecasts for GARCH.
+Moreover, we used **GARCH(1,1)** for predicting volatility using only the last year from the data as well as the last month from the data. All of the plots has shown straigh or almost straigh line. That is why wwe decided to do the rolling forecasts for GARCH.
 
 ![Alt text](image/garch_rolling.png)
 
@@ -127,7 +134,7 @@ The models we examined were:
 | **Model 7 (GRU, 50 Epochs, StandardScaler, early stopping, NO dropouts, Close, batchsize=32, n_steps=120, RMSprop)** | 2823.36 | 1452.78 | 0.9815 | 0.001752 | 61.78% |
 | **Model 8 (GRU, 50 Epochs, MinMaxScaler, early stopping, NO dropouts, Close, batchsize=32, n_steps=60, RMSprop)** | 2689.83 | 1915.69 | 0.9833 | 0.002702 | 60.97% |
 | **Model 9 (GRU, 50 Epochs, StandardScaler, early stopping, dropouts, Close, batchsize=32, n_steps=120, RMSprop)** | 2611.39 | 1865.43 | 0.9842 | 0.003290 | 63.39% |
-| **Final Model (GRU, 125 Units, 100 Epochs, MinMaxScaler, NO early stopping, NO dropouts, Close, batchsize=64, n_steps=60, RMSprop) 3 MONTHS PREDICTIONS** | **1903.58** | **1366.47** | **0.9827** | **0.000796** | **23.06%** |
+| **Final Model (GRU, 125 Units, 100 Epochs, MinMaxScaler, NO early stopping, NO dropouts, Close, batchsize=64, n_steps=60, RMSprop) YEARLY PREDICTIONS (2024-01-10 - 2024-12-31)** | **1903.58** | **1366.47** | **0.9827** | **0.000796** | **23.06%** |
 
 Best model visualization:
 
