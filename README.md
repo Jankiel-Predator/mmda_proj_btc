@@ -148,7 +148,7 @@ After retraining **LSTM** and **GRU** for **1000+ days predictions**, the result
 
 In this case, LSTM performs slightly better in all key metrics, though the difference is small. Also, the computational cost between both is unobservable, providing aditional advantage to LSTM.
 
-Best (longterm forecast) model visualization:
+Best (longterm forecast: 2022-02-12 - 2025-01-01) model visualization:
 
 ![Alt text](images/lstm.png)
 
