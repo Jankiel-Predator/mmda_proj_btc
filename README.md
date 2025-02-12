@@ -119,11 +119,11 @@ The rolling forecasts of volatility using the GARCH model provided a more dynami
 #### LSTM & GRU
 Long-short-term memory models are extremely powerful time-series models. Due to their architecture, they can predict an arbitrary number of steps into the future. The major factor that distinguishes them from other neural networks is their recurrent setting, which on the high level, may be perceived as training several neural networks which, working sequentially (in loops), communicate with each other on the way. The family of RNN is formed by Long Short Term Memory (LSTM) & Gated Recurrent Unit (GRU) models.
 
-We use both of them to predict feature **Price**/**Close** of Bitcoin, applying different layers, neuron units, time period predicted, training data volume, usage of several features and so on. We visualized the results plotting the actual vs predicted lines on top of each other. In general, to select the most efficient and well-adjusted model we used several metrics: **RMSE**, **MAE**, **R2**, **MSLE**, **MAPE** with special focus on **RMSE** as the simple yet insightful residual analysis method.
+We use both of them to predict feature **Price**/**Close** of Bitcoin, applying different layers, neuron units, time period predicted, training data volume, usage of several features and so on. We visualized the results plotting the actual vs predicted lines on top of each other. In general, to select the most efficient and well-adjusted model we used several metrics: **RMSE**, **MAE**, **R²**, **MSLE**, **MAPE** with special focus on **RMSE** as the simple yet insightful residual analysis method.
 
 The models we examined were:
 
-| Model Description | RMSE | MAE | R² Score | MSLE | MAPE |
+| Model Description | RMSE | MAE | R² | MSLE | MAPE |
 |------------------|------|-----|---------|------|------|
 | **Model 1 New LSTM architecture (whatever it means...) 0.8/0.2** | 4279.11 | 3399.72 | 0.9178 | 0.002309 | 19.90% |
 | **Model 2 Increased units from 125 → 256 0.8/0/2** | 4071.47 | — | — | — | — |
@@ -141,7 +141,7 @@ The models we examined were:
 After retraining **LSTM** and **GRU** for **1000+ days predictions**, the results improved as compared to yearly predictions performed and documented above:
 **1000+ days forecast:**
 
-| Model Description | RMSE | MAE | R² Score | MSLE | MAPE |
+| Model Description | RMSE | MAE | R² | MSLE | MAPE |
 |------------------|------|-----|---------|------|------|
 |**GRU 125 Units + 50 Epochs** | 1789.62 | 1353.18 | 0.9931 | 0.001575 | 63.60% |
 |**LSTM 125 Units + 50 Epochs** | **1759.30** | **1169.44** | **0.9933** | **0.001244** | **63.61%** |
