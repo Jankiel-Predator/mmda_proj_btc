@@ -167,3 +167,5 @@ The Prophet model appears to capture the general trend effectively, though some 
 - https://datascientest.com/en/facebook-prophet-all-you-need-to-know
 - https://stats.stackexchange.com/questions/423238/arima-rolling-window
 - https://medium.com/@yennhi95zz/a-guide-to-time-series-models-in-machine-learning-usage-pros-and-cons-ac590a75e8b3
+- https://www.datacamp.com/tutorial/tutorial-for-recurrent-neural-network
+- https://www.datacamp.com/tutorial/lstm-python-stock-market
